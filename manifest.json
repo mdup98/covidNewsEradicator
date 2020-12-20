@@ -1,0 +1,19 @@
+{
+    "manifest_version": 2,
+    "name": "Covid blocker (CZSK)",
+    "version": "1.0.0",
+    "description": "Blokuje novinové články o covide, kompatibilné s CZ SK a EN stránkami.",
+    "icons": {"128": "icon_128.png"},
+    "browser_action":{
+        "default_icon" : "icon_16.png",
+        "default_popup" : "popup.html"
+    },
+    "permissions": ["activeTab"],
+	"content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["script.js"]
+        }
+    ]
+}
+    
