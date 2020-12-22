@@ -16,12 +16,13 @@ function docReady(fn) {
         document.addEventListener("DOMContentLoaded", fn);
     }
 }    
-// odstrani stranku s korona v url
+
+// getURL
 function getURL(){
     url =  window.location.toString()
 }
 
-//odstranuje panely a prehledy specificke pro jednotlive stranky
+//removing some dashboards from sites i use
 // AKTUALNE, PRAZSKY DENNIK, SME
 function removePanels(){
     if (url.match(/aktualne.cz/g)){     document.querySelector("#special-widget-6913b46063a111ea80e60cc47ab5f122").remove()}
@@ -29,9 +30,9 @@ function removePanels(){
     else if (url.match(/prazsky.denik.cz/g)){document.querySelector(".covid-banner").remove()}
     else if (url.match(/seznamzpravy.cz/g)){ document.querySelector("#szn-clanky > div > div > div:nth-child(2) > div > header > div.c_d > div.d_iq._5f0d802c27da4d1cb55fb040 > div.f_ip._5f5a183107c5c81028a33c12 > div > iframe").remove()}
 }
-// odstranuje vsechen kontent s keywordami
+
 function removeContent(){
-    // vsetky clanky a nadpisy s klucovimi slovami
+    // all elements with keywords
     allNodes = document.querySelectorAll("h1, h2, h3, h4, h5, a, p, li");
     for (i = 0; i < allNodes.length; i++) {
         text = allNodes[i].textContent
@@ -42,14 +43,7 @@ function removeContent(){
     }
 }
 
-
-/* version that waits for reklamy 
-window.onload = function runExtension(){
-    removePage();
-    removePanels();
-    removeContent();
-} */
-
+//Execute with every new page, novinky is special i dont know why
 docReady(function() {
     getURL();
     if (url.match(/novinky.cz/g))
@@ -59,6 +53,15 @@ docReady(function() {
     else{
     removePanels();
     removeContent();}
-});  
-
+}); 
+//Scrolling and appearing content
 window.setInterval(removeContent, 1000)
+
+/* version that waits for fullload
+window.onload = function runExtension(){
+    removePage();
+    removePanels();
+    removeContent();
+} */
+
+  
